@@ -5,13 +5,13 @@ import Product from "./Product";
 
 const Products = () => {
     // const [data,setData] = useState([]);
-    // const [filter,setFilter] = useState(data);
     const dispatch = useDispatch()
     const products = useSelector((state)=>state.allProducts)
+    const [filter,setFilter] = useState(products);
 
     useEffect(()=>{
         dispatch(getProducts())
-    },[dispatch])
+    },[dispatch,filter])
 
     const Loading = ()=>{
       return (
@@ -21,19 +21,33 @@ const Products = () => {
       )
     }
 
+    const filterProducts = (cat)=>{
+     const updated = products.filter((product)=>product.category === cat)
+     setFilter(updated)
+    }
+
     const ShowProducts = ()=>{
       return (
         <>
         <div className="buttons d-flex justify-content-center mb-5 pb-5">
-          <button className="btn btn-outline-dark me-2">All</button>
-          <button className="btn btn-outline-dark me-2">Men's Clothing</button>
-          <button className="btn btn-outline-dark me-2">Women's Clothing</button>
-          <button className="btn btn-outline-dark me-2">Jellwery</button>
-          <button className="btn btn-outline-dark me-2">Electronic</button>
+          <button className="btn btn-outline-dark me-2" 
+            onClick={()=>setFilter(products)}>All</button>
+          <button className="btn btn-outline-dark me-2" 
+            onClick={()=>filterProducts("men's clothing")}>Men's Clothing</button>
+          <button className="btn btn-outline-dark me-2" 
+            onClick={()=>filterProducts("women's clothing")}>Women's Clothing</button>
+          <button className="btn btn-outline-dark me-2"
+            onClick={()=>filterProducts("jewelery")}>Jellwery</button>
+          <button className="btn btn-outline-dark me-2"
+            onClick={()=>filterProducts("electronics")}>Electronic</button>
         </div>
-        {products.map((product)=>(
+        {filter ? filter.map((product)=>(
             <Product details={product} key={product.id}/>
-          ))}
+          )) 
+                : products.map((product)=>(
+                  <Product details={product} key={product.id}/>
+          )) 
+        }
         </>
       )
     }

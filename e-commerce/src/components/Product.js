@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom"
+
 const Product = (props) => {
   return (
     <>
@@ -9,9 +11,9 @@ const Product = (props) => {
           <p className="card-text lead fw-bold">
                 ${props.details.price}
             </p>
-          <a href="#" className="btn btn-outline-dark">
+          <NavLink to={`/products/${props.details.id}`} className="btn btn-outline-dark">
            Buy Now
-          </a>
+          </NavLink>
         </div>
       </div>
       </div>
