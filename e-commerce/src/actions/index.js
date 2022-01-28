@@ -31,3 +31,21 @@ export const  getProducts = async () =>{
         payload:response.data
     }
   }
+
+
+  export const  addCart = (product) =>{
+    
+     return{
+        type:"AddItem",
+        payload:product
+    }
+  }
+
+
+  export const  deleteCart = (product) =>{
+    
+    return{
+       type:"DeleteItem",
+       payload:product
+   }
+ }

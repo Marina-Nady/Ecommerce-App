@@ -1,6 +1,9 @@
 import { NavLink } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { addCart } from './../reducers/addCart';
 
 const Navbar = () => {
+     const cart = useSelector(state=>state.handleCart)
     return(
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light py-3 shadow-sm">
@@ -45,7 +48,7 @@ const Navbar = () => {
                     </NavLink>                    
                     <NavLink className="btn btn-outline-dark ms-2" to="/cart">
                         <i className="fa fa-shopping-cart me-1"></i>
-                        Cart (0)
+                        Cart ({cart.length})
                     </NavLink>
                 </div>
 
